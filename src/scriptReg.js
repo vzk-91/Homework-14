@@ -5,10 +5,9 @@ const email = document.getElementById('email');
 const registration = document.getElementById('registration');
 
 
-function validate (data,page) {
-    let re = /\S+@\S+\.\S+/;
-    if(lastname.value.length > 2 && firstname.value.length >3 && password.value.length > 6 && re.test(email.value)){
-        window.open(page)
+function validate (data) {
+    if(data.lastname.length > 2 && data.username.length >3 && data.password.length > 6){
+        window.open("login.html")
     }  else {
         return alert('not validate')
     }
@@ -22,6 +21,7 @@ registration.addEventListener('click', function () {
     password : password.value,
     email : email.value
   }
+  validate(data)
 
   fetch( 
     'https://it-blog-posts.herokuapp.com/api/people',
@@ -34,12 +34,13 @@ registration.addEventListener('click', function () {
     }
   )
   .then(function (response) {
-    console.log(response)
+    console.log(response.status)
   })
   .catch(function (err) {
     console.log("Error", err);
   });
    
-  validate(data,"login.html")
 
 })
+
+
